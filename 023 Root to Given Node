@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode{
+    
+    int val;
+    TreeNode *left, *right;
+    
+    TreeNode(int x){
+        val=x;
+        left=NULL;
+        right=NULL;
+    }
+    
+};
+
+bool rootToGivenNode(TreeNode *root, int val, vector<int> &ans){
+    
+    if(!root) return false;
+    
+    ans.push_back(root->val);
+    
+    if(root->val == val) return true;
+    
+    if(rootToGivenNode(root->left,val,ans) or rootToGivenNode(root->right,val,ans)) return true;
+    
+    ans.pop_back();
+    
+    return false;
+    
+}
+
+int main() {
+    
+    TreeNode *root = new TreeNode(1);
+    root->left= new TreeNode(2);
+    root->right= new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->right->left = new TreeNode(6);
+    
+    vector<int> ans;
+    
+    rootToGivenNode(root,5,ans);
+    
+    for(auto a: ans) cout<<a<<" ";
+    
+    return 0;
+}
