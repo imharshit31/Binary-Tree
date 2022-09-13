@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode{
+    
+    int val;
+    TreeNode *left, *right;
+    
+    TreeNode(int x){
+        val=x;
+        left=NULL;
+        right=NULL;
+    }
+    
+};
+
+int mx=INT_MIN,mn=INT_MAX;
+    
+int maxInBinaryTree(TreeNode *root){
+    
+    if(!root) return mx;
+    return max({mx,root->val,maxInBinaryTree(root->left),maxInBinaryTree(root->right)});
+}
+
+int minInBinaryTree(TreeNode *root){
+    
+    if(!root) return mn;
+    return min({mn,root->val,minInBinaryTree(root->left),minInBinaryTree(root->right)});   
+}
+
+int main() {
+    
+    TreeNode *root = new TreeNode(1);
+    root->left= new TreeNode(2);
+    root->right= new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->right->left = new TreeNode(6);
+    
+    cout<<maxInBinaryTree(root)<<endl;
+    cout<<minInBinaryTree(root)<<endl;
+    
+    return 0;
+}
